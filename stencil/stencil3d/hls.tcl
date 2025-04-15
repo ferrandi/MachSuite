@@ -1,8 +1,10 @@
-open_project stencil_syn
+open_project stencil3d_syn
 
-add_files stencil.c
+add_files stencil.c -cflags "-I../../common"
 add_files input.data
 add_files check.data
+add_files -tb local_support.c -cflags "-I../../common"
+add_files -tb ../../common/support.c
 add_files -tb ../../common/harness.c 
 
 set_top stencil3d
@@ -13,6 +15,6 @@ create_clock -period 10
 source ./stencil_dir
 
 csynth_design
-cosim_design -rtl verilog -tool modelsim -trace_level all
+cosim_design -rtl verilog
 
 exit

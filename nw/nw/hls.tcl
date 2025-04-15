@@ -1,8 +1,10 @@
 open_project nw_syn
 
-add_files nw.c
+add_files nw.c -cflags "-I../../common"
 add_files input.data
 add_files check.data
+add_files -tb local_support.c -cflags "-I../../common"
+add_files -tb ../../common/support.c
 add_files -tb ../../common/harness.c
 
 #add_files -tb nw_test.c
@@ -15,7 +17,7 @@ create_clock -period 10
 #source ./nw_dir
 #config_rtl -reset all -reset_level low
 csynth_design 
-cosim_design -rtl verilog -tool modelsim
+cosim_design -rtl verilog
 #-trace_level all
 
 exit

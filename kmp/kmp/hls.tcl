@@ -1,8 +1,10 @@
 open_project kmp_syn
 
-add_files kmp.c
+add_files kmp.c -cflags "-I../../common"
 add_files input.data
 add_files check.data
+add_files -tb local_support.c -cflags "-I../../common"
+add_files -tb ../../common/support.c
 add_files -tb ../../common/harness.c
 
 #add_files -tb kmp_test.c
@@ -15,6 +17,6 @@ create_clock -period 10
 #source ./kmp_dir
 #config_rtl -reset all -reset_level low
 csynth_design
-cosim_design -rtl verilog -tool modelsim
+cosim_design -rtl verilog
 
 exit

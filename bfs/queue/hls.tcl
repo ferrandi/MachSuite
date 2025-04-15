@@ -1,8 +1,10 @@
-open_project bfs_syn
+open_project bfs_queue_syn
 
-add_files bfs.c
+add_files bfs.c -cflags "-I../../common"
 add_files input.data
 add_files check.data
+add_files -tb local_support.c -cflags "-I../../common"
+add_files -tb ../../common/support.c
 add_files -tb ../../common/harness.c
 
 set_top bfs
@@ -13,6 +15,6 @@ create_clock -period 10
 source ./bfs_dir
 #config_rtl -reset all -reset_level low
 csynth_design
-cosim_design -rtl verilog -tool modelsim -trace_level all
+cosim_design -rtl verilog
 
 exit

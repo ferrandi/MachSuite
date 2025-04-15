@@ -1,4 +1,4 @@
-open_project stencil_syn
+open_project stencil2d_syn
 
 add_files stencil.c -cflags "-I../../common"
 add_files input.data
@@ -17,6 +17,6 @@ source ./stencil_dir
 
 
 csynth_design
-cosim_design -rtl verilog -tool modelsim
+cosim_design -rtl verilog
 
 exit

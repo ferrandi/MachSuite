@@ -1,4 +1,4 @@
-open_project bfs_syn
+open_project bfs_parallel_queue_syn
 
 add_files bfs.cpp -cflags "-I../../common"
 add_files input.data
@@ -15,6 +15,6 @@ create_clock -period 10
 source ./bfs_dir
 #config_rtl -reset all -reset_level low
 csynth_design
-cosim_design -rtl verilog -tool modelsim
+cosim_design -rtl verilog
 
 exit

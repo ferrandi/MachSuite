@@ -1,8 +1,10 @@
 open_project viterbi_syn
 
-add_files viterbi.c
+add_files viterbi.c -cflags "-I../../common"
 add_files input.data
 add_files check.data
+add_files -tb local_support.c -cflags "-I../../common"
+add_files -tb ../../common/support.c
 add_files -tb ../../common/harness.c
 
 #add_files -tb viterbi_test.c
@@ -17,6 +19,6 @@ create_clock -period 10
 #config_rtl -reset all -reset_level low
 
 csynth_design
-cosim_design -rtl verilog -tool modelsim 
+cosim_design -rtl verilog 
 
 exit

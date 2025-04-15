@@ -1,10 +1,12 @@
-open_project sort_syn
+open_project sort_radix_syn
 
 set_top ss_sort
 
-add_files sort.c
+add_files sort.c -cflags "-I../../common"
 add_files input.data
 add_files check.data
+add_files -tb local_support.c -cflags "-I../../common"
+add_files -tb ../../common/support.c
 add_files -tb ../../common/harness.c
 
 set clock 10
@@ -19,6 +21,6 @@ source ./inline_dir
 #config_rtl -reset all -reset_level low
 set_clock_uncertainty 0
 csynth_design 
-cosim_design -rtl verilog -tool modelsim -trace_level all
+cosim_design -rtl verilog
 
 exit

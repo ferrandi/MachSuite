@@ -1,8 +1,10 @@
 open_project aes_syn
 
-add_files aes.c
+add_files aes.c -cflags "-I../../common"
 add_files input.data
 add_files check.data
+add_files -tb local_support.c -cflags "-I../../common"
+add_files -tb ../../common/support.c
 add_files -tb ../../common/harness.c
 
 #add_files -tb aes_test.c
@@ -15,6 +17,6 @@ create_clock -period 10
 source ./aes_dir
 #config_rtl -reset all -reset_level low
 csynth_design
-cosim_design -rtl verilog -tool modelsim -trace_level all
+cosim_design -rtl verilog
 
 exit
