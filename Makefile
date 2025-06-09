@@ -1,5 +1,6 @@
 BENCHMARKS=\
 	aes/aes \
+	backprop/backprop \
 	bfs/bulk \
 	bfs/queue \
 	fft/strided \
@@ -17,24 +18,22 @@ BENCHMARKS=\
 	stencil/stencil2d \
 	stencil/stencil3d \
 	viterbi/viterbi
-#FIXME\
-	backprop/backprop \
 
 CFLAGS=-O3 -Wall -Wno-unused-label
 
-.PHONY: build run generate all test clean
+.PHONY: build run generate all test clean $(BENCHMARKS)
 
-build:
-	@( for b in $(BENCHMARKS); do $(MAKE) CFLAGS="$(CFLAGS)" -C $$b; done )
+$(BENCHMARKS):
+	@echo "Entering directory '$@' and running target '$(MAKECMDGOALS)'..."
+	$(MAKE) -C $@ CFLAGS="$(CFLAGS)" $(MAKECMDGOALS)
 
-run:
-	@( for b in $(BENCHMARKS); do $(MAKE) CFLAGS="$(CFLAGS)" -C $$b run; done )
+build: $(BENCHMARKS)
 
-generate:
-	@( for b in $(BENCHMARKS); do $(MAKE) CFLAGS="$(CFLAGS)" -C $$b generate; done )
+run: $(BENCHMARKS)
 
-hls:
-	@( for b in $(BENCHMARKS); do $(MAKE) -C $$b hls; done )
+generate: $(BENCHMARKS)
+
+hls: $(BENCHMARKS)
 
 
 ### For regression tests

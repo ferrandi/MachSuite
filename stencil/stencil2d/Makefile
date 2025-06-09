@@ -17,7 +17,7 @@ generate: $(FILES) generate.c
 	./generate
 
 hls: $(KERN).c $(KERN).h
-	vitis_hls hls.tcl
+	MAKEFLAGS= vitis_hls hls.tcl
 
 clean:
 	rm -f $(KERN) generate output.data

@@ -1,4 +1,5 @@
 open_project fft_transpose_syn
+source ../../config.tcl
 
 set_top fft1D_512
 
@@ -9,15 +10,21 @@ add_files -tb local_support.c -cflags "-I../../common"
 add_files -tb ../../common/support.c
 add_files -tb ../../common/harness.c
 
-set clock 10
-set part virtex7
-
 open_solution fft
-set_part $part
-create_clock -period $clock
-set_clock_uncertainty 0
+set_part $part_name
+create_clock -period $period
 #source ./fft_dir
-config_rtl -reset all -reset_level low
-csynth_design
-cosim_design -rtl verilog
-exit
+set_clock_uncertainty 0
+
+if {$enable_csim} {
+    csim_design
+}
+if {$enable_synth} {
+    csynth_design
+}
+if {$enable_cosim} {
+    cosim_design -rtl verilog
+}
+if {$enable_impl} {
+    export_design -flow impl -rtl verilog -format ip_catalog
+}
